@@ -1,0 +1,13 @@
+{
+    "name": "annie/url-shortener",
+    "authors": [
+        {
+            "name": "Annemarie Kohler",
+            "email": "annie@designmynight.com"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "5.4.*"
+    }
+}
