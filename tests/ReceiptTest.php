@@ -17,7 +17,7 @@ class ReceiptTest extends TestCase
     $this->receipt = new Receipt($order, $menu);
   }
 
-  public function testCalculatePrice()
+  public function testCalculateNetPrice()
   {
     $this->assertSame(11.15, $this->receipt->calculateNetPrice());
   }
