@@ -2,33 +2,40 @@
 
 class Receipt
 {
+  public $totalPrice;
+  public $tax;
 
   public function __construct($order, $menu)
   {
     $this->order = $order;
     $this->menu = $this->convertPriceList($menu);
     $this->prices = $this->menu[0]["prices"][0];
-    $this->tax = 8.64;
+    $this->taxPercentage = 8.64;
   }
 
   public function calculateNetPrice()
   {
-    return array_reduce($this->order, function($carry, $item){
-      return $carry + $this->prices[$item];
-    });
+    $price = 0;
+    foreach ($this->order as $order) {
+      foreach ($order as $item => $amount) {
+        $price += $this->prices[$item] * $amount;
+      }
+    }
+    return $price;
   }
 
   public function calculateTotalPrice()
   {
     $netPrice = $this->calculateNetPrice();
-    $tax = $this->calculateTax($netPrice);
-    return $netPrice + $tax;
+    $this->totalPrice = $netPrice + $this->calculateTax($netPrice);
+    return $this->totalPrice;
   }
 
   private function calculateTax($netPrice)
   {
-    $tax = $this->tax / 100 * $netPrice;
-    return round($tax, 2);
+    $tax = $this->taxPercentage / 100 * $netPrice;
+    $this->tax = round($tax, 2);
+    return $this->tax;
   }
 
   private function convertPriceList($data)
