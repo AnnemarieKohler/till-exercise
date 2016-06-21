@@ -12,7 +12,9 @@ class ReceiptTest extends TestCase
 
   public function setUp()
   {
-    $order = [["Cafe Latte" => 2], ["Choc Mudcake" => 1]];
+    $order = [["name" => "Cafe Latte", "amount" => 2],
+              ["name" => "Choc Mudcake", "amount" => 1]];
+
     $menu = json_encode($this->list);
     $this->receipt = new Receipt($order, $menu);
   }
@@ -22,16 +24,16 @@ class ReceiptTest extends TestCase
     $this->assertSame(15.90, $this->receipt->calculateNetPrice());
   }
 
-  public function testTotalPrice()
+  public function testGetTotalPrice()
   {
     $this->receipt->calculateTotalPrice();
-    $this->assertSame(17.27, $this->receipt->totalPrice);
+    $this->assertSame(17.27, $this->receipt->getTotalPrice());
   }
 
-  public function testTax()
+  public function testGetTax()
   {
     $this->receipt->calculateTotalPrice();
-    $this->assertSame(1.37, $this->receipt->tax);
+    $this->assertSame(1.37, $this->receipt->getTax());
   }
 
 }

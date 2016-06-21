@@ -1,0 +1,22 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h2>Receipt</h2>
+
+    <ul>
+      {{#order}}
+      <li>{{name}} x {{amount}}</li>
+      {{/order}}
+
+      <li>Tax £{{receipt.getTax}}</li>
+      <li>Total £{{receipt.getTotalPrice}}</li>
+    </ul>
+
+
+  </body>
+</html>
